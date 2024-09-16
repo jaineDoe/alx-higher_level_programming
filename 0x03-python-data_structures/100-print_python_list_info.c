@@ -1,6 +1,19 @@
-#!/usr/bin/python3
-max_integer = __import__('9-max_integer').max_integer
+#include <stdlib.h>
+#include <stdio.h>
+#include <Python.h>
+/**
+ * print_python_list_info -  function that prints some basic
+ *							info about Python lists
+ * @p: python list
+ */
+void print_python_list_info(PyObject *p)
+{
+	int elem;
 
-my_list = [1, 90, 2, 13, 34, 5, -13, 3]
-max_value = max_integer(my_list)
-print("Max: {}".format(max_value))
+	printf("[*] Size of the Python List = %lu\n", Py_SIZE(p));
+	printf("[*] Allocated = %lu\n", ((PyListObject *)p)->allocated);
+	for (elem = 0; elem < Py_SIZE(p); elem++)
+		printf("Element %d: %s\n", elem, Py_TYPE(PyList_GetItem(p, elem))->tp_name);
+}
+
+
